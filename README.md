@@ -1,10 +1,10 @@
-# VerifyForge TypeScript SDK
+# VerifyForge Email Validation API - TypeScript SDK
 
 [![npm version](https://badge.fury.io/js/@verifyforge%2Fsdk.svg)](https://badge.fury.io/js/@verifyforge%2Fsdk)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Official TypeScript/JavaScript client library for the [VerifyForge](https://verifyforge.com) Email Validation API.
+Official TypeScript/JavaScript SDK for the [VerifyForge](https://verifyforge.com) Email Validation API.
 
 ## Features
 
@@ -340,7 +340,7 @@ All errors extend `VerifyForgeError`:
 
 ```bash
 # Clone the repository
-git clone https://github.com/verifyforge/typescript-sdk.git
+git clone https://github.com/VerifyForge/typescript-sdk.git
 cd typescript-sdk
 
 # Install dependencies
@@ -369,7 +369,7 @@ npm run dev
 
 - 📧 Email: support@verifyforge.com
 - 📚 Documentation: https://verifyforge.com/api-docs
-- 🐛 Bug Reports: https://github.com/verifyforge/typescript-sdk/issues
+- 🐛 Bug Reports: https://github.com/VerifyForge/typescript-sdk/issues
 
 ## License
 

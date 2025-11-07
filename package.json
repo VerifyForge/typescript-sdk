@@ -41,10 +41,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/verifyforge/typescript-sdk.git"
+    "url": "https://github.com/VerifyForge/typescript-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/verifyforge/typescript-sdk/issues"
+    "url": "https://github.com/VerifyForge/typescript-sdk/issues"
   },
   "homepage": "https://verifyforge.com",
   "devDependencies": {
