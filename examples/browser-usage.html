@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerifyForge SDK - Browser Example</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .input-group {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+        }
+
+        .result.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .result.error {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        pre {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 VerifyForge SDK - Browser Example</h1>
+        <p>This example shows how to use the VerifyForge SDK in a browser environment.</p>
+
+        <div class="input-group">
+            <label for="apiKey">API Key:</label>
+            <input type="text" id="apiKey" placeholder="your_api_key_here">
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" placeholder="test@example.com">
+        </div>
+
+        <button id="validateBtn" onclick="validateEmail()">Validate Email</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script type="module">
+        import { VerifyForge, VerifyForgeError } from 'https://unpkg.com/@verifyforge/sdk@latest/dist/index.mjs';
+
+        window.validateEmail = async function() {
+            const apiKey = document.getElementById('apiKey').value;
+            const email = document.getElementById('email').value;
+            const resultDiv = document.getElementById('result');
+            const btn = document.getElementById('validateBtn');
+
+            if (!apiKey) {
+                resultDiv.innerHTML = '<div class="result error">Please enter your API key</div>';
+                return;
+            }
+
+            if (!email) {
+                resultDiv.innerHTML = '<div class="result error">Please enter an email address</div>';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Validating...';
+
+            try {
+                const client = new VerifyForge({ apiKey });
+                const result = await client.validate(email);
+
+                const statusClass = result.data.isValid ? 'success' : 'error';
+                const statusIcon = result.data.isValid ? '✓' : '✗';
+
+                resultDiv.innerHTML = `
+                    <div class="result ${statusClass}">
+                        <h3>${statusIcon} ${result.data.isValid ? 'Valid' : 'Invalid'} Email</h3>
+                        <p><strong>Email:</strong> ${result.data.email}</p>
+                        <p><strong>Reachability:</strong> ${result.data.reachability}</p>
+                        <p><strong>Disposable:</strong> ${result.data.disposable ? 'Yes' : 'No'}</p>
+                        <p><strong>Role Account:</strong> ${result.data.roleAccount ? 'Yes' : 'No'}</p>
+                        <p><strong>Free Provider:</strong> ${result.data.freeProvider ? 'Yes' : 'No'}</p>
+                        <p><strong>Credits Used:</strong> ${result.creditsUsed}</p>
+                        <p><strong>Credits Remaining:</strong> ${result.remainingCredits}</p>
+                        <details>
+                            <summary style="cursor: pointer; margin-top: 10px;">View Full Response</summary>
+                            <pre>${JSON.stringify(result, null, 2)}</pre>
+                        </details>
+                    </div>
+                `;
+            } catch (error) {
+                let errorMessage = 'An error occurred';
+
+                if (error instanceof VerifyForgeError) {
+                    errorMessage = error.toString();
+                } else if (error instanceof Error) {
+                    errorMessage = error.message;
+                }
+
+                resultDiv.innerHTML = `
+                    <div class="result error">
+                        <h3>❌ Error</h3>
+                        <p>${errorMessage}</p>
+                    </div>
+                `;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Validate Email';
+            }
+        };
+    </script>
+</body>
+</html>
