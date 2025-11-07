@@ -1,6 +1,6 @@
 {
   "name": "@verifyforge/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official TypeScript/JavaScript SDK for VerifyForge Email Validation API",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
