@@ -1,4 +1,6 @@
-# VerifyForge Email Validation API - TypeScript SDK
+# VerifyForge TypeScript SDK
+
+## Email Validation API - TypeScript/JavaScript Client
 
 [![npm version](https://badge.fury.io/js/@verifyforge%2Fsdk.svg)](https://badge.fury.io/js/@verifyforge%2Fsdk)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
