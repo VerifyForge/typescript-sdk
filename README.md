@@ -369,7 +369,7 @@ npm run dev
 
 ## Support
 
-- 📧 Email: support@verifyforge.com
+- 📧 Email: contact@verifyforge.com
 - 📚 Documentation: https://verifyforge.com/api-docs
 - 🐛 Bug Reports: https://github.com/VerifyForge/typescript-sdk/issues
 
